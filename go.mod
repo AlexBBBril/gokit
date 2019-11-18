@@ -3,7 +3,7 @@ module github.com/AlexBBBril/gokit
 go 1.13
 
 require (
-	github.com/go-kit/kit v0.9.0 // indirect
+	github.com/go-kit/kit v0.9.0
 	github.com/go-logfmt/logfmt v0.4.0 // indirect
-	github.com/gofrs/uuid v3.2.0+incompatible // indirect
+	github.com/gofrs/uuid v3.2.0+incompatible
 )
