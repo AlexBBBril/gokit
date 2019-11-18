@@ -1,0 +1,28 @@
+version: '3.5'
+
+volumes:
+    postgres_go_kit_test: ~
+
+## Services
+###############################################################################
+services:
+    postgres_go_kit_test:
+        image: postgres:10
+        shm_size: '300m'
+        environment:
+            POSTGRES_PASSWORD: docker
+            POSTGRES_USER: docker
+            POSTGRES_DB: "postgres_go_kit_test"
+            TZ: "Europe/Moscow"
+        restart: always
+        volumes:
+            - "postgres_go_kit_test:/var/lib/postgresql/data"
+            - "${HOME}:/var/data"
+        ports:
+            - "${EXTERNAL_PGSQL_PORT}:5432"
+    rabbit:
+        image: rabbitmq:3.6-management
+        ports:
+        - "${RABBIT_PORT}:5672"
+        - "${RABBIT_MANAGEMENT_PORT}:15672"
+
