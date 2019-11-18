@@ -1,4 +1,4 @@
-package dto
+package order
 
 import "github.com/AlexBBBril/gokit/internal/app/gokit/entity"
 

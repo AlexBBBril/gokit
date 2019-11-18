@@ -1,9 +1,8 @@
-package endpoint
+package order
 
 import (
 	"context"
 	"github.com/AlexBBBril/gokit/internal/app/gokit/service"
-	"github.com/AlexBBBril/gokit/internal/app/gokit/transport/dto"
 	"github.com/go-kit/kit/endpoint"
 )
 
@@ -25,10 +24,10 @@ func MakeEndpoints(s service.OrderService) Endpoints {
 
 func makeCreateEndpoint(s service.OrderService) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (response interface{}, err error) {
-		req := request.(dto.CreateRequest)
+		req := request.(CreateRequest)
 		id, err := s.Create(ctx, req.Order)
 
-		return dto.CreateResponse{
+		return CreateResponse{
 			ID:  id,
 			Err: err,
 		}, nil
@@ -37,10 +36,10 @@ func makeCreateEndpoint(s service.OrderService) endpoint.Endpoint {
 
 func makeGetByIDEndpoint(s service.OrderService) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (response interface{}, err error) {
-		req := request.(dto.GetByIDRequest)
+		req := request.(GetByIDRequest)
 		orderRequest, err := s.GetByID(ctx, req.ID)
 
-		return dto.GetByIDResponse{
+		return GetByIDResponse{
 			Order: orderRequest,
 			Err:   err,
 		}, nil
@@ -49,9 +48,9 @@ func makeGetByIDEndpoint(s service.OrderService) endpoint.Endpoint {
 
 func makeChangeStatusEndpoint(s service.OrderService) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (response interface{}, err error) {
-		req := request.(dto.ChangeStatusRequest)
+		req := request.(ChangeStatusRequest)
 		err = s.ChangeStatus(ctx, req.ID, req.Status)
 
-		return dto.ChangeStatusResponse{Err: err}, nil
+		return ChangeStatusResponse{Err: err}, nil
 	}
 }
